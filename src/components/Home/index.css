@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1c2237;
+  }
+  
+  .description {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #58616f;
+  }
+  
+  .signup-btn {
+    background-color: #0984e3;
+    color: #fff;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .signup-btn:hover {
+    background-color: #74b9ff;
+  }
+  
