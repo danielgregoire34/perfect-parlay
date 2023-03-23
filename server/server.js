@@ -1,23 +1,13 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const { typeDefs, resolvers } = require('./schema');
+const { typeDefs, resolvers } = require('./schema/index');
 const { authMiddleware } = require('./utils/auth');
 const path = require('path');
 const db = require('./config/connection');
 
+const PORT = process.env.PORT || 3001;
 
 const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false    
-    .then(() => console.log('DB connected'))
-    .catch(err => console.log(err))
-});
 
 const server = new ApolloServer({
     typeDefs,
@@ -25,10 +15,10 @@ const server = new ApolloServer({
     context: authMiddleware,
 });
 
-const startApolloServer = async (typeDefs, resolvers) => {
-    await server.start();
-    server.applyMiddleware({ app });
-};
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
@@ -36,15 +26,34 @@ if (process.env.NODE_ENV === 'production') {
 
 
 
-server.applyMiddleware({ app });
-
-const PORT = process.env.PORT || 3001;
-
-db.once('open', () => {
-app.listen({ port: PORT }, () => {
-    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
-    console.log(`API server running on port ${PORT}!`);
-    });
+/*
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false    
+    .then(() => console.log('DB connected'))
+    .catch(err => console.log(err))
 });
+*/
+
+const startApolloServer = async (typeDefs, resolvers) => {
+    await server.start();
+    server.applyMiddleware({ app });
+
+    db.once('open', () => {
+        app.listen({ port: PORT }, () => {
+            console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+            console.log(`API server running on port ${PORT}!`);
+            });
+        });
+        
+
+};
+
+
+
+//server.applyMiddleware({ app });
+
+
 
 startApolloServer(typeDefs, resolvers);
