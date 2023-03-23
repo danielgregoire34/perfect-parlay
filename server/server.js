@@ -28,7 +28,6 @@ const server = new ApolloServer({
 const startApolloServer = async (typeDefs, resolvers) => {
     await server.start();
     server.applyMiddleware({ app });
-    await new Promise(resolve => app.listen({ port: 4000 }, resolve));
 };
 
 if (process.env.NODE_ENV === 'production') {
