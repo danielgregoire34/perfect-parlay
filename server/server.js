@@ -1,9 +1,12 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+
 const { typeDefs, resolvers } = require('./schema/index');
+
 const { authMiddleware } = require('./utils/auth');
 const path = require('path');
 const db = require('./config/connection');
+
 
 const PORT = process.env.PORT || 3001;
 
@@ -27,6 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 /*
+
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -34,7 +38,9 @@ mongoose.connect(process.env.MONGO_URI, {
     .then(() => console.log('DB connected'))
     .catch(err => console.log(err))
 });
+
 */
+
 
 const startApolloServer = async (typeDefs, resolvers) => {
     await server.start();
