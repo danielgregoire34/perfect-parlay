@@ -25,17 +25,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-
-/*
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false    
-    .then(() => console.log('DB connected'))
-    .catch(err => console.log(err))
-});
-*/
-
 const startApolloServer = async (typeDefs, resolvers) => {
     await server.start();
     server.applyMiddleware({ app });
@@ -49,11 +38,6 @@ const startApolloServer = async (typeDefs, resolvers) => {
         
 
 };
-
-
-
-//server.applyMiddleware({ app });
-
 
 
 startApolloServer(typeDefs, resolvers);
