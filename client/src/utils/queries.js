@@ -7,15 +7,28 @@ export const GET_ME = gql`
             _id
             username
             email
-            bookCount
-            savedBooks {
-                bookId
-                authors
-                description
-                title
-                image
-                link
             }
         }
     }
 `;
+
+export const GET_USER = gql`
+    query getUser($username: String!) {
+        user(username: $username) {
+            _id
+            username
+            email
+        }
+    }
+`;
+
+export const GET_USER_BY_ID = gql`
+    query getUserById($userId: ID!) {
+        userById(userId: $userId) {
+            _id
+            username
+            email
+        }
+    }
+`;
+

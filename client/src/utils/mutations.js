@@ -7,6 +7,19 @@ export const LOGIN_USER = gql`
             token
             user {
                 _id
+                username
+            }
+        }
+    }
+`;
+
+export const LOGOUT_USER = gql`
+    mutation logoutUser {
+        logout {
+            token
+            user {
+                _id
+                username
             }
         }
     }
@@ -18,45 +31,36 @@ export const ADD_USER = gql`
             token
             user {
                 _id
+                username
+                email
             }
         }
     }
 `;
 
-export const SAVE_BOOK = gql`
-    mutation saveBook($bookData: bookInput!) {
-        saveBook(bookData: $bookData) {
-            _id
-            username
-            email
-            bookCount
-            savedBooks {
-                bookId
-                authors
-                description
-                title
-                image
-                link
+export const UPDATE_USER = gql`
+    mutation updateUser($username: String!, $email: String!, $password: String!) {
+        updateUser(username: $username, email: $email, password: $password) {
+            token
+            user {
+                _id
+                username
+                email
             }
         }
     }
 `;
 
-export const REMOVE_BOOK = gql`
-    mutation removeBook($bookId: ID!) {
-        removeBook(bookId: $bookId) {
-            _id
-            username
-            email
-            bookCount
-            savedBooks {
-                bookId
-                authors
-                description
-                title
-                image
-                link
+export const REMOVE_USER = gql`
+    mutation removeUser($username: String!, $email: String!, $password: String!) {
+        removeUser(username: $username, email: $email, password: $password) {
+            token
+            user {
+                _id
+                username
+                email
             }
         }
     }
 `;
+
