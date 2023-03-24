@@ -18,3 +18,6 @@ const typeDefs = gql`
         deleteUser(id: ID!): User!
     }
 `;
+
+module.exports = typeDefs;
+
