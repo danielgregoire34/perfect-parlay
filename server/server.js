@@ -35,8 +35,6 @@ const startApolloServer = async (typeDefs, resolvers) => {
             console.log(`API server running on port ${PORT}!`);
             });
         });
-        
-
 };
 
 

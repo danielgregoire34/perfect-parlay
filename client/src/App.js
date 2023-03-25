@@ -1,19 +1,22 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from './components/pages/Home';
-import Signup from './components/pages/Signup';
-import Login from './components/pages/Login';
-import Contact from './components/pages/Contact';
-// import Navbar from './components/pages/Navbar';
-import PredictorPicker from './components/pages/PredictorPicker';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, createHttpLink, ApolloProvider } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+
+import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Contact from './pages/Contact';
+import Navbar from './components/Navbar';
+// import PredictorPicker from './pages/PredictorPicker';
+// import Layout from './components/Layout/Layout';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext(({ headers }) => {
   const token = localStorage.getItem('id_token');
   return {
     headers: {
@@ -32,14 +35,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <>
-        {/* <Navbar /> */}
-        <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/signup' element={<Signup />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path='/predictorpicker' element={<PredictorPicker />} />
-        </Routes>
+      <Navbar />
+          <Routes>
+              <Route exact path='/' element={<Home />} />
+              <Route path='/signup' element={<Signup />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/contact' element={<Contact />} />
+              {/* <Route path='/predictorpicker' element={<PredictorPicker />} /> */}
+          </Routes>
+        {/* <Contact /> */}
       </>
     </ApolloProvider>
   )
