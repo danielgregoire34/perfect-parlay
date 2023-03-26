@@ -15,6 +15,7 @@ import Profile from './pages/Profile';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
+  cache: new InMemoryCache(),
 });
 
 const authLink = setContext(({ headers }) => {
