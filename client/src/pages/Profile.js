@@ -14,9 +14,8 @@ const Profile = () => {
   });
 
   const user = data?.me || data?.user || {};
-  // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/me" />;
+    return <Navigate to="/profile" />;
   }
 
   if (loading) {
@@ -27,37 +26,37 @@ const Profile = () => {
     return (
       <h4>
         You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
+        log in or go to the home page to sign up!
       </h4>
     );
   }
 
-  // return (
-  //   <div>
-  //     <div className="flex-row justify-center mb-3">
-  //       <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-  //         Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-  //       </h2>
-
-  //       <div className="col-12 col-md-10 mb-5">
-  //         <ThoughtList
-  //           thoughts={user.thoughts}
-  //           title={`${user.username}'s thoughts...`}
-  //           showTitle={false}
-  //           showUsername={false}
-  //         />
-  //       </div>
-  //       {!userParam && (
-  //         <div
-  //           className="col-12 col-md-10 mb-3 p-3"
-  //           style={{ border: '1px dotted #1a1a1a' }}
-  //         >
-  //           <ThoughtForm />
-  //         </div>
-  //       )}
-  //     </div>
-  //   </div>
-  // );
-};
+    return (
+        <div className="container">
+          <div className="main-content">
+            <div className="my-bets-container box">
+              <h2>My Bets</h2>
+              <ul>
+                <li>Team A to win the Super Bowl</li>
+                <li>Player B to score the first goal in the soccer match</li>
+                <li>Team C to win the World Series</li>
+              </ul>
+            </div>
+            <div className="signup-container box">
+              <h1 className="title">Parlay Perfecter</h1>
+              <p className="description">Find the perfect parlay for you!</p>
+            </div>
+            <div className="info-board-container box">
+              <h2>Info Board</h2>
+              <ul>
+                <li>Latest news: Team X has signed a new star player</li>
+                <li>Upcoming events: NBA playoffs start next week</li>
+                <li>Statistics: Team Y has the best record in the league</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    );
+  };
 
 export default Profile;
