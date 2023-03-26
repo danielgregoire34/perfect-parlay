@@ -1,40 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { login } from '../../../server/controllers/user-controller';
 import './index.css';
 
-const SignUp = () => {
-  return (
-    <div className="SignUpContainer">
-      <h1>Sign Up</h1>
-      <form>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" name="name" />
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  );
-};
+function SignIn() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-const Login = () => {
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('/api/authenticate', { username, password });
+      const token = response.data.token;
+      // Store the JWT in client-side storage
+      localStorage.setItem('token', token);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post('/api/register', { username, password });
+      const token = response.data.token;
+      // Store the JWT in client-side storage
+      localStorage.setItem('token', token);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
-    <div className="SignUpContainer">
-      <h1>Login</h1>
-      <form>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" />
-        <button type="submit">Login</button>
-      </form>
+    <div className="App">
+      <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleRegister}>Register</button>
     </div>
   );
-};
+}
 
 const AuthPage = () => {
-  return (
+  return login (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <SignUp />
       <Login />
@@ -42,5 +47,6 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default {AuthPage , SignIn};
+
 
