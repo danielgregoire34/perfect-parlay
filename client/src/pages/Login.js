@@ -37,8 +37,8 @@ const Login = (props) => {
     };
   
     return (
-      <main className="flex-row justify-center mb-4">
-        <div className="col-12 col-lg-10">
+      <main className="flex-row justify-center mb-4 login">
+        <div className="login-container">
           <div className="card">
             <h4 className="card-header bg-dark text-light p-2">Login</h4>
             <div className="card-body">
@@ -48,7 +48,7 @@ const Login = (props) => {
                   <Link to="/">back to the homepage.</Link>
                 </p>
               ) : (
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleFormSubmit} className="login-inputs">
                   <input
                     className="form-input"
                     placeholder="Your email"
@@ -66,7 +66,7 @@ const Login = (props) => {
                     onChange={handleChange}
                   />
                   <button
-                    className="btn btn-block btn-primary"
+                    className="btn btn-block btn-primary login-btn"
                     style={{ cursor: 'pointer' }}
                     type="submit"
                   >
