@@ -1,4 +1,4 @@
-const router = require('express').Router();
+/*const router = require('express').Router();
 const {
 login,
 } = require('../../controllers/user-controller');
@@ -13,3 +13,4 @@ router.route('/me').get(authMiddleware, getSingleUser);
 
 
 module.exports = router;
+*/
