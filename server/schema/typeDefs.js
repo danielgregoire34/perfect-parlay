@@ -8,6 +8,7 @@ const typeDefs = gql`
         password: String!
     }
 
+
     type Query {
         user(id:ID!): User
         users: [User]
