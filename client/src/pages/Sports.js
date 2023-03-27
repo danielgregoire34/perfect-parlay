@@ -357,7 +357,7 @@ const SportsBetting = () => {
       let oddsOption = document.createElement('option');
       oddsOption.textContent = `${oddsData[i].home_team}: ${oddsData[i].bookmakers[i].markets[0].outcomes[0].price}, ${oddsData[i].away_team}: ${oddsData[i].bookmakers[0].markets[0].outcomes[1].price}`;
       oddsSelector.appendChild(oddsOption);
-      console.log('oddsOption: ' + oddsOption)
+      console.log(oddsOption)
     }
     
     betCard.appendChild(oddsSelector);
