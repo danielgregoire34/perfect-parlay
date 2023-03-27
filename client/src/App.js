@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './components/Home';
-import Signup from './components/Signup';
-import Contact from './components/Contact'
-import PredictorPicker from './components/Predictor-Picker';
-
-function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/predictorpicker' element={<PredictorPicker />} />
-        </Route>
-      </Routes>
-    </>
-=======
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, createHttpLink, ApolloProvider } from '@apollo/client';
@@ -70,7 +48,6 @@ function App() {
           </Routes>
       </>
     </ApolloProvider>
->>>>>>> 0f15c25d954d0ce14c83b2462486492000610d65
   )
 }
 

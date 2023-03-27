@@ -194,7 +194,7 @@ input {
 
 
 /* Login page CSS */
-.login {
+/* .login {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -240,6 +240,55 @@ input {
   align-items: center;
   width: 200px;
   max-width: 500px;
+} */
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200px;
+  height: 500px;
+  text-align: center;
+  background-color: #021534;
+  color: #ffffff;
+}
+
+.card-header {
+  background-color: #021534;
+  color: #ffffff;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-input {
+  background-color: #ffffff;
+  color: #021534;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  max-width: 500px;
+}
+
+.login-btn {
+  background-color: #021534;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.login-btn:hover {
+  transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-color: rgb(234, 234, 18);
+  color: #021534;
 }
 
 /* Profile page CSS */
