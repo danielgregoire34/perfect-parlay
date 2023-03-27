@@ -14,6 +14,7 @@ const resolvers = {
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
             const user = User({ username, email, password });
+            await user.save();
             const token = signToken(user);
             return {user, token};
         },
@@ -24,8 +25,22 @@ const resolvers = {
         deleteUser: async (parent, { id }) => {
             const user = await User.findByIdAndDelete(id);
             return user;
-        }
-    }
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+              throw new Error('Incorrect email or password');
+            }
+
+            if (password !== user.password) {
+              throw new Error('Incorrect email or password');
+            }
+
+            const token = signToken(user);
+            return { user, token };
+          },
+    },
 };
 
 module.exports = resolvers;

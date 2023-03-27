@@ -10,9 +10,9 @@ const Signup = () => {
     email: '',
     password: '',
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+const [addUser, { error, data }] = useMutation(ADD_USER);
 
-  const handleChange = (event) => {
+const handleChange = (event) => {
     const { name, value } = event.target;
 
     setFormState({
@@ -21,7 +21,7 @@ const Signup = () => {
     });
   };
 
-  const handleFormSubmit = async (event) => {
+const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
 
@@ -32,7 +32,7 @@ const Signup = () => {
 
       Auth.login(data.addUser.token);
     } catch (e) {
-      console.error(e);
+      console.error("signup error: " + e);
     }
   };
 
@@ -45,7 +45,7 @@ const Signup = () => {
             {data ? (
               <p>
                 Success! You may now head{' '}
-                <Link to="/profile">Now to the profile page</Link>
+                <Link to="/">Now back to the home page</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit} className="form-inputs">
