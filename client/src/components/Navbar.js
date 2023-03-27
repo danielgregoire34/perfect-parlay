@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // import { LOGOUT_USER } from '../utils/mutations'
 
@@ -22,8 +22,4 @@ const Navbar = () => (
 
 
 export default Navbar;
-
-{/* <FontAwesomeIcon className="icon" icon="fa-solid fa-house" color="blue" /> */}
-{/* <FontAwesomeIcon className="icon" icon="fa-solid fa-address-book" color="blue" /> */}
-{/* <FontAwesomeIcon className="icon" icon="fa-solid fa-right-to-bracket" color="blue" /> */}
 

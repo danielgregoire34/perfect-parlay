@@ -10,15 +10,14 @@ import Contact from './pages/Contact';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
 // import PredictorPicker from './pages/PredictorPicker';
-// import Layout from './components/Layout/Layout';
 
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
 });
 
-const authLink = setContext(({ headers }) => {
+const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
   return {
     headers: {
