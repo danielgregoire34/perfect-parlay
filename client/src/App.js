@@ -43,9 +43,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/contact' element={<Contact />} />
               <Route path='/profile' element={<Profile />} />
-              {/* <Route path='/predictorpicker' element={<PredictorPicker />} /> */}
           </Routes>
-        {/* <Contact /> */}
       </>
     </ApolloProvider>
   )
