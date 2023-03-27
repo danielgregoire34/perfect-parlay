@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <title>Git it Done</title>
+</head>
+
+<body>
+  <div class="dashboard">
+      <div class="card" id = "priorBets">
+          <div class="card-item">Left Item 1</div>
+          <div class="card-item">Left Item 2</div>
+          <div class="card-item">Left Item 3</div>
+          <div class="card-item">Left Item 4</div>
+          <div class="card-item">Left Item 5</div>
+      </div>
+      <div class="prediction-picker">
+          <div class="card" id ="predictorCard">
+              <select id ='betselector' onclick="Proceeder(this.value)">
+                  <option value="">Select a Sector</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Finance">Finance</option>
+              </select>
+          </div>
+      </div>
+      <div class="infoBoard" id="infoBoard">
+      </div>
+  </div>
+  <script src="./assets/js/homepage.js"></script>
+</body>
+
+</html>
