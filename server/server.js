@@ -1,6 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const { typeDefs, resolvers } = require('./schema/index');
+const { typeDefs, resolvers } = require('./schema');
 const { authMiddleware } = require('./utils/auth');
 const path = require('path');
 const db = require('./config/connection');
@@ -25,21 +25,13 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-
-
-/*
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false    
-    .then(() => console.log('DB connected'))
-    .catch(err => console.log(err))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
-*/
 
 const startApolloServer = async (typeDefs, resolvers) => {
     await server.start();
-    server.applyMiddleware({ app });
+    server.applyMiddleware({ app, path: '/graphql' });
 
     db.once('open', () => {
         app.listen({ port: PORT }, () => {
@@ -47,14 +39,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
             console.log(`API server running on port ${PORT}!`);
             });
         });
-        
-
 };
-
-
-
-//server.applyMiddleware({ app });
-
 
 
 startApolloServer(typeDefs, resolvers);

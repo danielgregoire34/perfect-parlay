@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -11,18 +12,35 @@ const resolvers = {
         }
     },
     Mutation: {
-        createUser: async (parent, { email, password }) => {
-            const user = User({ email, password });
+        addUser: async (parent, { username, email, password }) => {
+            const user = User({ username, email, password });
             await user.save();
-            return user;
+            const token = signToken(user);
+            return {user, token};
         },
         updateUser: async (parent, { _id, email, password }) => {
             const user = await User.findByIdAndUpdate(id, { email, password }, { new: true });
             return user;
+        },
+        deleteUser: async (parent, { id }) => {
+            const user = await User.findByIdAndDelete(id);
+            return user;
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+              throw new Error('Incorrect email or password');
+            }
+
+            if (password !== user.password) {
+              throw new Error('Incorrect email or password');
+            }
+
+            const token = signToken(user);
+            return { user, token };
+          },
     },
-    deleteUser: async (parent, { id }) => {
-        const user = await User.findByIdAndDelete(id);
-        return user;
-    }
-    }
 };
+
+module.exports = resolvers;
