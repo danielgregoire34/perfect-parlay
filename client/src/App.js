@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Contact from './pages/Contact';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
+import Sports from './pages/Sports';
 // import PredictorPicker from './pages/PredictorPicker';
 
 
@@ -43,6 +44,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/contact' element={<Contact />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/sports' element={<Sports />} />
           </Routes>
       </>
     </ApolloProvider>
