@@ -348,3 +348,20 @@ table tbody tr:nth-child(even) {
   border-radius: 5px;
   font-weight: bold;
 }
+
+/* Sports page CSS */
+.sports-container {
+  display: flex;
+}
+
+.selectDiv {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.resultsDiv {
+  border: 1px solid black;
+  padding: 10px;
+  overflow-y: scroll;
+  max-height: 200px;
+}

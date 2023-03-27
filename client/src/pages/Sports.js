@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const SportsBetting = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const sportsAPIKey = "8b80cb19e317c4b97ba6b368e1d88304";
+  const navigate = useNavigate();
   const [sportsLeagues, setSportsLeagues] = useState([
     {
       name: "Select a League and select a type of bet to see the odds and scores!",
@@ -93,7 +93,7 @@ const SportsBetting = () => {
       profileButton.textContent = "Go to Finance Profile";
       profileButton.classList.add("profileButton");
       profileButton.addEventListener("click", () => {
-        window.location.href = "/profile";
+        navigate("/profile");
       });
       const betCard = document.querySelector("#predictorCard");
       betCard.innerHTML = "";
@@ -106,18 +106,25 @@ const SportsBetting = () => {
     const nbascoresURL = `https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom=2&apiKey=${sportsAPIKey}`;
 
     fetch(nbascoresURL)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        const sampleScores = data;
-        console.log(sampleScores);
-        starterSportsDisplay(sampleScores);
-      });
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    const sampleScores = data;
+    console.log(sampleScores);
+    starterSportsDisplay(sampleScores);
+    return sampleScores;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
   };
 
   const starterSportsDisplay = (sampleScores) => {
     let scoresContainer = document.querySelector("#infoBoard");
-
+    if (!sampleScores || sampleScores.length === 0) {
+      scoresContainer.textContent = "No scores found.";
+      return;
+    }
     for (let i = 0; i < sampleScores.length; i++) {
       let pastScore = document.createElement("div");
       pastScore.classList.add("card-item");
@@ -125,7 +132,7 @@ const SportsBetting = () => {
       scores.textContent = `${sampleScores[i].scores[0].name}: ${sampleScores[i].scores[0].score}, ${sampleScores[i].scores[1].name}: ${sampleScores[i].scores[1].score}`;
       let teamsBanner = document.createElement("h3");
       teamsBanner.textContent = `${sampleScores[i].home_team} vs. ${sampleScores[i].away_team}`;
-
+  
       pastScore.appendChild(teamsBanner);
       pastScore.appendChild(scores);
       scoresContainer.append(pastScore);
@@ -292,66 +299,86 @@ const SportsBetting = () => {
   }
 
   const displayCurrentSportsOdds = (oddsData) => {
-  console.log('current odds button clicked')
-  // wipes the bet card clean
-  const betCard = document.querySelector('#predictorCard');
-  betCard.innerHTML = '';
-
-  // chackboxes for odds
-  const checkbox1 = document.createElement('input');
-  checkbox1.type = 'checkbox';
-  checkbox1.id = 'homeTeam';
-  checkbox1.value = 'home team';
-
-  const label1 = document.createElement('label');
-  label1.htmlFor = 'checkbox1';
-  label1.textContent = 'Home Team';
-
-  const checkbox2 = document.createElement('input');
-  checkbox2.type = 'checkbox';
-  checkbox2.id = 'awayTeam';
-  checkbox2.value = 'away team';
-
-  const label2 = document.createElement('label');
-  label2.htmlFor = 'checkbox2';
-  label2.textContent = 'Away Team';
-  // Created a expiration date
-  const expirationDate = document.createElement('input');
-  expirationDate.setAttribute('type', 'date');
-  expirationDate.setAttribute('id', 'date-picker');
-  expirationDate.setAttribute('value', '2021-01-01');
-  // Created a submit button for the custom bets
-  var createdBetSubmitButton = document.createElement('button');
-  createdBetSubmitButton.textContent = 'Submit Custom Bet';
-  createdBetSubmitButton.classList.add('customBetSubmitButton');
-  createdBetSubmitButton.addEventListener('click', submitCreatedSportsBet);
-  // input for amount
-  const wagerAmount = document.createElement('input');
-  wagerAmount.setAttribute('type', 'number');
-  wagerAmount.setAttribute('id', 'bet-amount');
-  wagerAmount.setAttribute('step', '10.00');
-  wagerAmount.setAttribute('placeholder', 'Amount (e.g., 100 or 40.00)');
-  //appending
-  betCard.appendChild(checkbox1);
-  betCard.appendChild(label1);
-  betCard.appendChild(checkbox2);
-  betCard.appendChild(label2);
-  betCard.appendChild(wagerAmount);
-  betCard.appendChild(expirationDate);
-  betCard.appendChild(createdBetSubmitButton);
-  // options for odds(value is the odds)
-  let oddsSelector = document.createElement('select');
-  oddsSelector.setAttribute('id', 'odds-selector');
-  oddsSelector.addEventListener('change', () => {
-    const selectedBet = oddsSelector.value;
-    console.log('Selected league value:', selectedBet);
-  });
-    for (var i = 0; i < sportsLeagues.length; i++) { 
-    let oddsOption = document.createElement('option');
-    oddsOption.textContent = `${oddsData[i].home_team}: ${oddsData[i].bookmakers[0].markets[0].outcomes[0].price}, ${oddsData[i].away_team}: ${oddsData[i].bookmakers[0].markets[0].outcomes[1].price}`;
-    oddsSelector.appendChild(oddsOption);
-    betCard.appendChild(oddsSelector);
+    console.log('current odds button clicked');
+    
+    const betCard = document.querySelector('#predictorCard');
+    betCard.innerHTML = '';
+  
+    const checkbox1 = document.createElement('input');
+    checkbox1.type = 'checkbox';
+    checkbox1.id = 'homeTeam';
+    checkbox1.value = 'home team';
+  
+    const label1 = document.createElement('label');
+    label1.htmlFor = 'homeTeam';
+    label1.textContent = 'Home Team';
+  
+    const checkbox2 = document.createElement('input');
+    checkbox2.type = 'checkbox';
+    checkbox2.id = 'awayTeam';
+    checkbox2.value = 'away team';
+  
+    const label2 = document.createElement('label');
+    label2.htmlFor = 'awayTeam';
+    label2.textContent = 'Away Team';
+  
+    const expirationDate = document.createElement('input');
+    expirationDate.setAttribute('type', 'date');
+    expirationDate.setAttribute('id', 'date-picker');
+    expirationDate.setAttribute('value', '2021-01-01');
+  
+    const createdBetSubmitButton = document.createElement('button');
+    createdBetSubmitButton.textContent = 'Submit Custom Bet';
+    createdBetSubmitButton.classList.add('customBetSubmitButton');
+    createdBetSubmitButton.addEventListener('click', submitCreatedSportsBet);
+  
+    const wagerAmount = document.createElement('input');
+    wagerAmount.setAttribute('type', 'number');
+    wagerAmount.setAttribute('id', 'bet-amount');
+    wagerAmount.setAttribute('step', '10.00');
+    wagerAmount.setAttribute('placeholder', 'Amount (e.g., 100 or 40.00)');
+  
+    betCard.appendChild(checkbox1);
+    betCard.appendChild(label1);
+    betCard.appendChild(checkbox2);
+    betCard.appendChild(label2);
+    betCard.appendChild(wagerAmount);
+    betCard.appendChild(expirationDate);
+    betCard.appendChild(createdBetSubmitButton);
+  
+    let oddsSelector = document.createElement('select');
+    oddsSelector.setAttribute('id', 'odds-selector');
+    oddsSelector.addEventListener('change', () => {
+      const selectedBet = oddsSelector.value;
+      console.log('Selected league value:', selectedBet);
+    });
+    
+    for (let i = 0; i < oddsData.length; i++) { 
+      let oddsOption = document.createElement('option');
+      oddsOption.textContent = `${oddsData[i].home_team}: ${oddsData[i].bookmakers[0].markets[0].outcomes[0].price}, ${oddsData[i].away_team}: ${oddsData[i].bookmakers[0].markets[0].outcomes[1].price}`;
+      oddsSelector.appendChild(oddsOption);
     }
+    
+    betCard.appendChild(oddsSelector);
+  }
+  
+  const createOddsSelector = (oddsData) => {
+    const oddsSelector = document.createElement('select');
+    oddsSelector.id = 'odds-selector';
+    oddsSelector.addEventListener('change', () => {
+      const selectedBet = oddsSelector.value;
+      console.log('Selected league value:', selectedBet);
+    });
+  
+    for (let i = 0; i < sportsLeagues.length; i++) { 
+      const oddsOption = document.createElement('option');
+      const homeTeamOdds = oddsData[i].bookmakers[0].markets[0].outcomes[0].price;
+      const awayTeamOdds = oddsData[i].bookmakers[0].markets[0].outcomes[1].price;
+      oddsOption.textContent = `${oddsData[i].home_team}: ${homeTeamOdds}, ${oddsData[i].away_team}: ${awayTeamOdds}`;
+      oddsSelector.appendChild(oddsOption);
+    }
+  
+    return oddsSelector;
   }
 
   //submits custom bet
@@ -372,6 +399,7 @@ const SportsBetting = () => {
         <option value="Finance">Finance</option>
       </select>
       <div id="infoBoard"></div>
+      <div id="predictorCard"></div>
     </div>
   );
 };
