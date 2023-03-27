@@ -2,18 +2,17 @@
   "name": "parlay-perfector",
   "version": "0.1.0",
   "private": true,
-  "engines":{
-    "node":"12.11.1",
-    "npm":"6.14.8"
+  "engines": {
+    "node": "12.11.1",
+    "npm": "6.14.8"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.3.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "apollo-server-express": "^3.12.0",
+    "babel-plugin-macros": "^3.1.0",
+    "bootstrap": "^5.2.3",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
@@ -21,15 +20,21 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.9.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "node server/server.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "install": "cd client && npm install && cd ../server && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^6.5.1",
+    "eslint-config-react-app": "^7.0.1"
   },
   "eslintConfig": {
     "extends": [
