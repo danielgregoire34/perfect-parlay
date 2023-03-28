@@ -37,7 +37,7 @@ const Login = (props) => {
     };
   
     return (
-      <main className="flex-row justify-center mb-4 login">
+      <main className="flex-row justify-center mb-4 login container">
         <div className="login-container">
           <div className="card">
             <h4 className="card-header bg-dark text-light p-2">Login</h4>
@@ -45,7 +45,7 @@ const Login = (props) => {
               {data ? (
                 <p>
                   Success! You may now head{' '}
-                  <Link to="/profile">Now to the profile</Link>
+                  <Link to="/">Now to the home page</Link>
                 </p>
               ) : (
                 <form onSubmit={handleFormSubmit} className="login-inputs">

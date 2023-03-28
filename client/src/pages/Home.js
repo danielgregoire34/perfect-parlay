@@ -4,10 +4,10 @@ function Home() {
   return (
       <div className="container">
         <div className="main-content">
-          <div className="my-bets-container box">
-            <h2>Sports API</h2>
-            <p>API for sports data</p>
-            <Link to='/sports' className='sports-btn'>Sports</Link>
+          <div className="signup-container box">
+            <h1 className='title'>Sports API</h1>
+            <p className='description'>API for sports data</p>
+            <Link to='/sports' className='signup-btn'>Sports</Link>
           </div>
           <div className="signup-container box">
             <h1 className="title">Parlay Perfecter</h1>
