@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.connect( 
-    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/perfect-parlay',
+    process.env.MONGO_DB_URI || 'mongodb://127.0.0.1:27017/perfect-parlay',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,

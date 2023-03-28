@@ -25,7 +25,8 @@
     "start": "node server/server.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "build": "cd client && npm run build",
-    "install": "cd client && npm install && cd ../server && npm install"
+    "install": "cd client && npm install && cd ../server && npm install",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false "
   },
   "devDependencies": {
     "concurrently": "^6.5.1"
